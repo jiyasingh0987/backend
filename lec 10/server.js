@@ -37,4 +37,28 @@ app.post("/students", (req, res) => {
 });
 
 
+//update operation
+app.put("/students/:rollNo", (req, res) => {
+    const id = req.params.rollNo;
+    const data = req.body;
+    const student=students.find((student) => student.rollNo === Number(id));
+    if (!student) {
+      res.status(404).json({ success: false, message: "Student not found" });
+    }
+    student.name = data.name;
+    student.section = data.section; 
+    res.json({ success:true, student });
+});
+
+    // detele operation
+    app.delete("/students/:rollNo", (req, res) => {
+        const id = req.params.rollNo;
+        const studentIndex = students.findIndex((student) => student.rollNo === Number(id));
+        if (studentIndex === -1) {
+            res.status(404).json({ success: false, message: "Student not found" });
+        } else {
+        students.splice(studentIndex, 1);
+        res.json({ success: true, message: "Student deleted successfully" });
+
+}});
 app.listen(PORT, () => console.log("server is running"));
