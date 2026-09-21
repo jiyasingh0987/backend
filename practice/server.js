@@ -119,3 +119,23 @@ app.get("/about", authMiddleware, (req, res) => {
 })
 
 app.listen(PORT, () => console.log("server is running"));          
+
+
+const express = require("express");
+
+const app = express();
+
+// Middleware
+app.use((req, res, next) => {
+    console.log("Middleware is running");
+    next();
+});
+
+// Route
+app.get("/", (req, res) => {
+    res.send("Welcome to my website!");
+});
+
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
