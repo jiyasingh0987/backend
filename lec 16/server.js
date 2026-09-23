@@ -33,4 +33,8 @@ app.get("/about", authMiddleware, (req, res) => {
     res.send("hello from about page");
 })
 
+app.use((req, res) => {
+    res.status(404).json({success: false, message: "page not found"});
+});
+
 app.listen(PORT, () => console.log("server is running"));          
